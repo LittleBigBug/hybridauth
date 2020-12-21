@@ -719,6 +719,11 @@ abstract class OAuth2 extends AbstractAdapter implements AdapterInterface
             $url = rtrim($this->apiBaseUrl, '/') . '/' . ltrim($url, '/');
         }
 
+        // Hack ; idk why this is needed in my setup
+        $this->apiRequestHeaders = [
+            'Authorization' => 'Bearer ' . $this->getStoredData('access_token')
+        ];
+
         $parameters = array_replace($this->apiRequestParameters, (array)$parameters);
         $headers = array_replace($this->apiRequestHeaders, (array)$headers);
 
